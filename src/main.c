@@ -34,25 +34,21 @@ int labelsLength = 0;
 char** labels;
 int* lineNumbers;
 
-int _DEBUG = 1;
-
-//const char* outputFile = "/Users/cenidemo/Development/lucas/nand2tetris/projects/06/max/MaxL.hack";
-//const char* inputFile = "/Users/cenidemo/Development/lucas/nand2tetris/projects/06/max/MaxL.asm";
-//const char* outputFile = "/Users/cenidemo/Development/lucas/nand2tetris/projects/06/max/Max.hack";
-//const char* inputFile = "/Users/cenidemo/Development/lucas/nand2tetris/projects/06/max/Max.asm";
-//const char* outputFile = "/Users/cenidemo/Development/lucas/nand2tetris/projects/06/pong/PongL.hack";
-//const char* inputFile = "/Users/cenidemo/Development/lucas/nand2tetris/projects/06/pong/PongL.asm";
-const char* outputFile = "/Users/cenidemo/Development/lucas/nand2tetris/projects/06/pong/Pong.hack";
-const char* inputFile = "/Users/cenidemo/Development/lucas/nand2tetris/projects/06/pong/Pong.asm";
+int _DEBUG = 0;
 
 /**
  *  Reads from input, assemble from Hack mnemonics to binary machine code, stores result in output
  */
 int main(int argc, const char* argv[]) {
-//    if (argc < 2) {
-//        printf("Usage:\nHakAssembler <input file> <output file>\n");
-//        exit(0);
-//    }
+    if (argc < 3) {
+        printf("Usage:\nHakAssembler <input_file> <output_file> [-d|--debug]\n");
+        exit(0);
+    }
+    
+    const char *inputFile = argv[1];
+    const char *outputFile = argv[2];
+    
+    if (argc > 3) _DEBUG = strcmp(argv[3], "-d") == 0 || strcmp(argv[3], "--debug") == 0 ? 1 : 0;
     
     // open output in write "w" mode
     FILE* output = fopen(outputFile, "w");
